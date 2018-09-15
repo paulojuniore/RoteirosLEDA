@@ -20,7 +20,6 @@ public class BubbleSort<T extends Comparable<T>> extends AbstractSorting<T> {
 					Util.swap(array, j, j+1);
 				}
 			}
-			System.out.println(Arrays.toString(array));
 		}
 	}
 }
