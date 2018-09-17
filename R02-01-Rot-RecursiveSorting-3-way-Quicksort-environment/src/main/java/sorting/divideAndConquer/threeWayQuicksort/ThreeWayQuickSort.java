@@ -1,6 +1,7 @@
 package sorting.divideAndConquer.threeWayQuicksort;
 
 import sorting.AbstractSorting;
+import util.Util;
 
 public class ThreeWayQuickSort<T extends Comparable<T>> extends
 		AbstractSorting<T> {
