@@ -10,19 +10,18 @@ public class FloorBinarySearchImpl implements Floor {
 	}
 	
 	private Integer floorBinarySearch(Integer[] array, int ini, int fim, int x) {
-		Integer retorno = 0;
 		if(ini > fim)
-			retorno = null;
-		else {
-			int meio = (ini + fim)/2;
-			if(array[meio] == x)
-				retorno = array[meio];
-			else if(array[meio] < x)
-				retorno = floorBinarySearch(array, meio+1, fim, x);
-			else if(array[meio] > x)
-				retorno = floorBinarySearch(array, ini, meio-1, x);
-		}
-		return retorno;
+			return null;
+		if(x >= array[fim])
+			return array[fim];
+		int meio = (ini+fim)/2;
+		if(array[meio] == x)
+			return array[meio];
+		if(meio > 0 && array[meio-1] <= x && x < array[meio])
+			return array[meio-1];
+		if(x < array[meio])
+			return floorBinarySearch(array, ini, meio-1, x);
+		return floorBinarySearch(array, meio+1, fim, x);
 	}
 	
 	private void insertionSort(Integer[] array, int leftIndex, int rightIndex) {
@@ -37,6 +36,5 @@ public class FloorBinarySearchImpl implements Floor {
 			}
 			array[j] = key;
 		}
-		
 	}
 }

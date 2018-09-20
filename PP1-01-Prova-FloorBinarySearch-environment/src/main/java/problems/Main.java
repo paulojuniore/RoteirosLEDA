@@ -9,7 +9,7 @@ public class Main {
 		Integer[] array2 = {3, 1, 7, 0, 5, 8, 9};
 		System.out.println(Arrays.toString(array2));
 		FloorBinarySearchImpl f = new FloorBinarySearchImpl();
-		Integer index = f.floor(array2, 4);
+		Integer index = f.floor(array2, 5);
 		System.out.println(Arrays.toString(array2));
 		System.out.println(index);
 	}
