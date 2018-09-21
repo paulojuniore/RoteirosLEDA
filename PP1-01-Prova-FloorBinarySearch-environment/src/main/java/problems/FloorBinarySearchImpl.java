@@ -56,4 +56,5 @@ public class FloorBinarySearchImpl implements Floor {
 			array[j] = key;
 		}
 	}
+	
 }
