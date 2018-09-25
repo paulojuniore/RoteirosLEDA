@@ -24,4 +24,5 @@ public class InsertionSort<T extends Comparable<T>> extends AbstractSorting<T> {
 			array[j] = key;
 		}
 	}
+
 }
