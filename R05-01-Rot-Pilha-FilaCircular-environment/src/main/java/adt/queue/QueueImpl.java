@@ -22,7 +22,7 @@ public class QueueImpl<T> implements Queue<T> {
 
 	@Override
 	public boolean isEmpty() {
-		return this.tail == -1;
+		return tail == -1;
 	}
 
 	@Override
