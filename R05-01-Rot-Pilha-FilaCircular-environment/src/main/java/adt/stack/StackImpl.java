@@ -10,6 +10,23 @@ public class StackImpl<T> implements Stack<T> {
 		array = (T[]) new Object[size];
 		top = -1;
 	}
+	
+	@Override
+	public void push(T element) throws StackOverflowException {
+		if(!this.isFull()) {
+			array[++top] = (T) element;
+		} else {
+			throw new StackOverflowException();
+		}
+	}
+	
+	@Override
+	public T pop() throws StackUnderflowException {
+		if(!this.isEmpty()) {
+			return array[top--];
+		}
+		throw new StackUnderflowException();
+	}
 
 	@Override
 	public T top() {
@@ -28,23 +45,6 @@ public class StackImpl<T> implements Stack<T> {
 	@Override
 	public boolean isFull() {
 		return top == array.length - 1;
-	}
-
-	@Override
-	public void push(T element) throws StackOverflowException {
-		if(!this.isFull()) {
-			array[++top] = (T) element;
-		} else {
-			throw new StackOverflowException();
-		}
-	}
-
-	@Override
-	public T pop() throws StackUnderflowException {
-		if(!this.isEmpty()) {
-			return array[top--];
-		}
-		throw new StackUnderflowException();
 	}
 
 }
