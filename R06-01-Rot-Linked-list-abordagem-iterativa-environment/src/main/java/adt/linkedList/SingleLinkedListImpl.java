@@ -72,8 +72,8 @@ public class SingleLinkedListImpl<T> implements LinkedList<T> {
 		T[] vetor = (T[]) new Object[this.size()];
 		int i = 0;
 		while(!aux.isNIL()) {
-			vetor[i] = aux.getData();
-			i++;
+			vetor[i++] = aux.getData();
+			aux = aux.getNext();
 		}
 		return vetor;
 	}
