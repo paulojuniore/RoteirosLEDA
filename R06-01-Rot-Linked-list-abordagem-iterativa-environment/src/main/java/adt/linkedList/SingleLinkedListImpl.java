@@ -13,7 +13,7 @@ public class SingleLinkedListImpl<T> implements LinkedList<T> {
 
 	@Override
 	public boolean isEmpty() {
-		return this.head.isNIL();
+		return head.isNIL();
 	}
 
 	@Override
@@ -27,41 +27,49 @@ public class SingleLinkedListImpl<T> implements LinkedList<T> {
 		return qtde;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public T search(T element) {
-		SingleLinkedListNode<T> retorno = null;
+		T retorno = null;
 		SingleLinkedListNode<T> atual = this.head;
-		while(!atual.getNext().isNIL()) {
+		while(!atual.isNIL()) {
 			if(atual.getData().equals(element)) {
-				retorno = atual;
+				retorno = atual.getData();
 			}
 			atual = atual.getNext();
 		}
-		return (T) retorno;
+		return retorno;
 	}
 	
 	@Override
 	public void insert(T element) {
-		if(isEmpty()) {
-			SingleLinkedListNode<T> node = new SingleLinkedListNode<>(element, head);
-			setHead(node);
-		} else {
-			SingleLinkedListNode<T> aux = head;
-			while(!aux.getNext().isNIL()) {
-				aux  = aux.getNext();
+		if(element != null) {
+			if(isEmpty()) {
+				SingleLinkedListNode<T> node = new SingleLinkedListNode<>(element, head);
+				setHead(node);
+			} else {
+				SingleLinkedListNode<T> aux = head;
+				while(!aux.getNext().isNIL()) {
+					aux  = aux.getNext();
+				}
+				SingleLinkedListNode<T> newNode = new SingleLinkedListNode<>(element, new SingleLinkedListNode<>());
+				aux.setNext(newNode);
 			}
-			SingleLinkedListNode<T> newNode = new SingleLinkedListNode<>(element, new SingleLinkedListNode<>());
-			aux.setNext(newNode);
 		}
 	}
 
 	@Override
 	public void remove(T element) {
-		if(!isEmpty()) {
-			SingleLinkedListNode<T> atual = head;
-			while(!atual.getNext().isNIL()) {
-
+		if(head.data.equals(element)) {
+			setHead(head.next);
+		} else {
+			SingleLinkedListNode<T> aux = this.head;
+			SingleLinkedListNode<T> previous = null;
+			while(!aux.isNIL() && aux.data != element) {
+				previous = aux;
+				aux = aux.next;
+			}
+			if(!aux.isNIL()) {
+				previous.next = aux.next;
 			}
 		}
 	}
