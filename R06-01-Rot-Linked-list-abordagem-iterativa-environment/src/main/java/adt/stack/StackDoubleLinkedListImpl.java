@@ -2,7 +2,6 @@ package adt.stack;
 
 import adt.linkedList.DoubleLinkedList;
 import adt.linkedList.DoubleLinkedListImpl;
-import adt.linkedList.DoubleLinkedListNode;
 import adt.linkedList.SingleLinkedListImpl;
 
 public class StackDoubleLinkedListImpl<T> implements Stack<T> {
@@ -27,6 +26,7 @@ public class StackDoubleLinkedListImpl<T> implements Stack<T> {
 	@Override
 	public T pop() throws StackUnderflowException {
 		if(!isEmpty()) {
+			@SuppressWarnings("unchecked")
 			T retorno = (T) ((SingleLinkedListImpl<T>) top).getHead();
 			top.removeFirst();
 			return retorno;
@@ -34,6 +34,7 @@ public class StackDoubleLinkedListImpl<T> implements Stack<T> {
 		throw new StackUnderflowException();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public T top() {
 		if(!isEmpty()) {
@@ -42,6 +43,7 @@ public class StackDoubleLinkedListImpl<T> implements Stack<T> {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean isEmpty() {
 		return ((SingleLinkedListImpl<T>) top).getHead().isNIL();
