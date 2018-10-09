@@ -1,8 +1,5 @@
 package adt.linkedList;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class RecursiveSingleLinkedListImpl<T> implements LinkedList<T> {
 
 	protected T data;
@@ -58,10 +55,10 @@ public class RecursiveSingleLinkedListImpl<T> implements LinkedList<T> {
 	@Override
 	public void insert(T element) {
 		if(isEmpty()) {
-			RecursiveSingleLinkedListImpl<T> node = 
-					new RecursiveSingleLinkedListImpl<T>(element, new RecursiveSingleLinkedListImpl<>());
+			this.setData(element);
+			this.setNext(new RecursiveSingleLinkedListImpl<>());
 		} else {
-			next.insert(element);
+			this.getNext().insert(element);
 		}
 	}
 
@@ -87,7 +84,7 @@ public class RecursiveSingleLinkedListImpl<T> implements LinkedList<T> {
 	private void list_toArray(int inicio, T[] array, RecursiveSingleLinkedListImpl<T> node) {
 		if(!node.isEmpty()) {
 			array[inicio] = node.getData();
-			list_toArray(inicio++, array, node.getNext());
+			list_toArray(++inicio, array, node.getNext());
 		}
 	}
 
