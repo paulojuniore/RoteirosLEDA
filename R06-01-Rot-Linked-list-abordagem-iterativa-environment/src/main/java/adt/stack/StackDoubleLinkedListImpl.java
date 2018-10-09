@@ -23,6 +23,7 @@ public class StackDoubleLinkedListImpl<T> implements Stack<T> {
       }
    }
 
+<<<<<<< HEAD
    @Override
    public T pop() throws StackUnderflowException {
       if (!isEmpty()) {
@@ -32,7 +33,20 @@ public class StackDoubleLinkedListImpl<T> implements Stack<T> {
       }
       throw new StackUnderflowException();
    }
+=======
+	@Override
+	public T pop() throws StackUnderflowException {
+		if(!isEmpty()) {
+			@SuppressWarnings("unchecked")
+			T retorno = (T) ((SingleLinkedListImpl<T>) top).getHead();
+			top.removeFirst();
+			return retorno;
+		}
+		throw new StackUnderflowException();
+	}
+>>>>>>> branch 'master' of https://github.com/paulojuniore/RoteirosLEDA.git
 
+<<<<<<< HEAD
    @Override
    public T top() {
       if (!isEmpty()) {
@@ -40,11 +54,29 @@ public class StackDoubleLinkedListImpl<T> implements Stack<T> {
       }
       return null;
    }
+=======
+	@SuppressWarnings("unchecked")
+	@Override
+	public T top() {
+		if(!isEmpty()) {
+			return (T) ((SingleLinkedListImpl<T>) top).getHead();
+		}
+		return null;
+	}
+>>>>>>> branch 'master' of https://github.com/paulojuniore/RoteirosLEDA.git
 
+<<<<<<< HEAD
    @Override
    public boolean isEmpty() {
       return ((SingleLinkedListImpl<T>) top).getHead().isNIL();
    }
+=======
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean isEmpty() {
+		return ((SingleLinkedListImpl<T>) top).getHead().isNIL();
+	}
+>>>>>>> branch 'master' of https://github.com/paulojuniore/RoteirosLEDA.git
 
    @Override
    public boolean isFull() {
