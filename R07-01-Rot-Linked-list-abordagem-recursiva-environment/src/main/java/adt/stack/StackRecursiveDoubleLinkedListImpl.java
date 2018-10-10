@@ -18,14 +18,20 @@ public class StackRecursiveDoubleLinkedListImpl<T> implements Stack<T> {
 		if(isFull()) {
 			throw new StackOverflowException();
 		} else {
-			
+			top.insertFirst(element);
 		}
 	}
 
 	@Override
 	public T pop() throws StackUnderflowException {
-		// TODO Implement the method
-		throw new UnsupportedOperationException("Method not implemented");
+		T retorno = null;
+		if(!isEmpty()) {
+			retorno = top();
+			top.removeFirst();
+		} else {
+			throw new StackUnderflowException();
+		}
+		return retorno;
 	}
 
 	@SuppressWarnings("unchecked")
