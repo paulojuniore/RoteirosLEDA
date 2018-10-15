@@ -1,8 +1,13 @@
 package adt.hashtable.closed;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import adt.hashtable.hashfunction.HashFunction;
+import adt.hashtable.hashfunction.HashFunctionClosedAddress;
 import adt.hashtable.hashfunction.HashFunctionClosedAddressMethod;
 import adt.hashtable.hashfunction.HashFunctionFactory;
+import util.Util;
 
 public class HashtableClosedAddressImpl<T> extends AbstractHashtableClosedAddress<T> {
 
@@ -50,32 +55,92 @@ public class HashtableClosedAddressImpl<T> extends AbstractHashtableClosedAddres
     * prime.
     */
    int getPrimeAbove(int number) {
-      // TODO Auto-generated method stub
-      throw new UnsupportedOperationException("Not implemented yet!");
+	   int result = number;
+	   if (result % 2 == 0) {
+	      result++;
+	   }
+	   while (!Util.isPrime(result)) {
+	      result += 2;
+	   }
+	   return result;
    }
+   
+   @SuppressWarnings({ "unchecked", "rawtypes" })
+   private int getHashIndex(T element) {
+      int index = 0;
+      if (this.hashFunction instanceof HashFunctionClosedAddress) {
+         index = ((HashFunctionClosedAddress) this.hashFunction).hash(element);
+      }
+      return index;
+   }
+
 
    @Override
    public void insert(T element) {
-      // TODO Auto-generated method stub
-      throw new UnsupportedOperationException("Not implemented yet!");
+      if(element != null) {
+    	  int index = this.getHashIndex(element);
+    	  if(this.table[index] == null) {
+    		  List<T> list = new LinkedList<T>();
+    		  list.add(element);
+    		  this.table[index] = list;
+    	  } else {
+    		  @SuppressWarnings("unchecked")
+			  List<T> array = (List<T>) this.table[index];
+    		  array.add(element);
+    		  this.COLLISIONS++;
+    	  }
+    	  this.elements++;
+      }
    }
 
    @Override
    public void remove(T element) {
-      // TODO Auto-generated method stub
-      throw new UnsupportedOperationException("Not implemented yet!");
+      if(element != null) {
+    	  int index = this.getHashIndex(element);
+    	  if(this.table[index] != null) {
+    		  @SuppressWarnings("unchecked")
+			  List<T> list = (List<T>) this.table[index];
+    		  if(list.contains(element)) {
+    			  if(list.size() > 1) {
+    				  this.COLLISIONS--;
+    			  }
+    			  list.remove(element);
+    			  this.elements--;
+    		  }
+    	  }
+      }
    }
 
    @Override
    public T search(T element) {
-      // TODO Auto-generated method stub
-      throw new UnsupportedOperationException("Not implemented yet!");
+      T result = null;
+      if(element != null) {
+    	  int index = this.getHashIndex(element);
+    	  if(this.table[index] != null) {
+    		  @SuppressWarnings("unchecked")
+			  List<T> list = (List<T>) this.table[index];
+    		  if(list.contains(element)) {
+    			  result = element;
+    		  }
+    	  }
+      }
+      return result;
    }
 
    @Override
    public int indexOf(T element) {
-      // TODO Auto-generated method stub
-      throw new UnsupportedOperationException("Not implemented yet!");
+      int indexOf = -1;
+      if(element != null) {
+    	  int index = this.getHashIndex(element);
+    	  if(this.table[index] != null) {
+    		  @SuppressWarnings("unchecked")
+			  List<T> list = (List<T>) this.table[index];
+    		  if(list.contains(element)) {
+    			  indexOf = index;
+    		  }
+    	  }
+      }
+      return indexOf;
    }
 
 }
