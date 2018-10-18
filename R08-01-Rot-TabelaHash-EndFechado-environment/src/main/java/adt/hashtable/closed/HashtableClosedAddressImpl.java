@@ -97,9 +97,6 @@ public class HashtableClosedAddressImpl<T> extends AbstractHashtableClosedAddres
 				@SuppressWarnings("unchecked")
 				List<T> list = (List<T>) this.table[index];
 				if (list.contains(element)) {
-					if (list.size() > 1) {
-						this.COLLISIONS--;
-					}
 					list.remove(element);
 					this.elements--;
 				}
