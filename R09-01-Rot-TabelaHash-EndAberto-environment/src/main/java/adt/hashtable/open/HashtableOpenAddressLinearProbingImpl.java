@@ -16,19 +16,21 @@ public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends
 
 	@Override
 	public void insert(T element) {
-		int i = 0;
-		while(i < this.table.length) {
-			int j = ((HashFunctionOpenAddress<T>) this.hashFunction).hash(element, i);
-			if(this.table[j] == null || this.table[j].equals(new DELETED())) {
-				this.table[j] = element;
-				this.elements++;
-				return;
-			} else {
-				i++;
-				this.COLLISIONS++;
+		if(element != null && this.search(element) == null) {
+			int i = 0;
+			while(i < this.table.length) {
+				int j = ((HashFunctionOpenAddress<T>) this.hashFunction).hash(element, i);
+				if(this.table[j] == null || this.table[j].equals(new DELETED())) {
+					this.table[j] = element;
+					this.elements++;
+					return;
+				} else {
+					i++;
+					this.COLLISIONS++;
+				}
 			}
+			throw new HashtableOverflowException();
 		}
-		throw new HashtableOverflowException();
 	}
 
 	@Override
@@ -44,8 +46,7 @@ public class HashtableOpenAddressLinearProbingImpl<T extends Storable> extends
 			} else {
 				i++;
 			}
-		}
-		
+		}	
 	}
 
 	@Override
