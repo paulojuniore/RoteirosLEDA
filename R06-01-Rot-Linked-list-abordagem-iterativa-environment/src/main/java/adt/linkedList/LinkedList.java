@@ -17,37 +17,50 @@ public interface LinkedList<T> {
 	/**
 	 * Searches for a given element in the list.
 	 * 
-	 * @param element
-	 *            the element being searched for
+	 * @param element the element being searched for
 	 * @return the element if it is in the list or null, otherwise
 	 */
 	public T search(T element);
 
 	/**
-	 * Inserts a new element at the end of the list. Null elements must be
-	 * ignored.
+	 * Inserts a new element at the end of the list. Null elements must be ignored.
 	 * 
-	 * @param element
-	 *            the element to be inserted
+	 * @param element the element to be inserted
 	 */
 	public void insert(T element);
 
 	/**
-	 * Removes an element from the list. If the element does not exist the list
-	 * is not changed.
+	 * Removes an element from the list. If the element does not exist the list is
+	 * not changed.
 	 * 
-	 * @param element
-	 *            the element to be removed
+	 * @param element the element to be removed
 	 */
 	public void remove(T element);
 
 	/**
-	 * Returns an array containing all elements in the structure. The array does
-	 * not contain empty spaces (or null elements). The elements are put into
-	 * the array from the beginning to the end of the list.
+	 * Returns an array containing all elements in the structure. The array does not
+	 * contain empty spaces (or null elements). The elements are put into the array
+	 * from the beginning to the end of the list.
 	 * 
-	 * @return an array containing all elements in the structure in the order
-	 *         they appear
+	 * @return an array containing all elements in the structure in the order they
+	 *         appear
 	 */
 	public T[] toArray();
+
+	/**
+	 * Swap two elements in a linked list, if there are both.
+	 * 
+	 * @param element1 first element
+	 * @param element2 second element
+	 */
+	public void swap(T element1, T element2);
+
+	/**
+	 * Returns the k-th element from the end of a linked list, if there is no null
+	 * return.
+	 * 
+	 * @param K-th element to be returned from the end.
+	 * @return the k-th element from the end of a linked list
+	 */
+	public T elementFromTheEnd(int k);
 }
