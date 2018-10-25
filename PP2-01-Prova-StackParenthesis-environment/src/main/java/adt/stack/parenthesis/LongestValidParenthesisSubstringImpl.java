@@ -13,8 +13,45 @@ public class LongestValidParenthesisSubstringImpl implements LongestValidParenth
      * @see adt.stack.parenthesis.LongestValidParenthesisSubstring#findLongest(java.lang.String)
      */
     public String findLongest(String parenthesis) {
-		// TODO Implement this method.
-		throw new UnsupportedOperationException("Not implemented yet!");
+		
+    	Stack<String> stack = new Stack<String>();
+    	
+    	String[] aux = parenthesis.split("");
+    	String maior = "";
+    	boolean flag = true;
+    	
+    	for(int i = 0; i < aux.length; i++) {
+    		if(aux[i].equals("(")) {
+    			int cont = 1;
+    			String aux2 = "";
+    			String verifica = "";
+    			while(aux[cont].equals("(")) {
+    				aux2 += aux[cont];
+    				cont++;
+    			}
+    			for(int j = 0; j < cont; j++) {
+    				if(aux[cont].equals("("))
+    					verifica += ")";
+    			}
+    			if(verifica.length() == aux2.length()) {
+    				String res = parenthesisMirror(aux2);
+    				if(aux2.equals(res)) {
+    					String auxiliar = aux2 + verifica;
+    					if(maior.length() < auxiliar.length()) {
+    						if(flag)
+    							maior += aux2 + verifica;
+    						else	
+    							maior = aux2 + verifica;
+    						flag = true;
+    					}
+    				} 
+    			} else {
+					flag = false;
+				}
+    		}
+    	}
+    	
+    	return maior;
     }
     
     /*
@@ -44,12 +81,22 @@ public class LongestValidParenthesisSubstringImpl implements LongestValidParenth
         
     	Stack<String> stack = new Stack<String>();
     	String mirrorStr = ""; 
+    	String[] parenteses = str.split("");
     	
-    	//adicione seu código aqui
+    	for(String p : parenteses) {
+    		if(p.equals("(")) {
+    			stack.push(")");
+    		} else if(p.equals(")")){
+    			stack.push("(");
+    		}
+    	}
     	
-		return mirrorStr;
+    	for(String p : stack) {
+    		mirrorStr = p + mirrorStr;
+    	}
+    	System.out.println(mirrorStr);
+    	return mirrorStr;
     	
-
     }
 
 }
