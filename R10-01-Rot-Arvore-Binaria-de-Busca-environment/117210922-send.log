@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2018-10-29T17:00:43.959-0300</date>
+  <logger>PAULO MENDES DA SILVA JUNIOR</logger>
+  <level>FINE</level>
+  <message>File 117210922-PAULO MENDES DA SILVA JUNIOR.zip was received. It was sent by PAULO MENDES DA SILVA JUNIOR from IP 192.168.0.100</message>
+</record>
