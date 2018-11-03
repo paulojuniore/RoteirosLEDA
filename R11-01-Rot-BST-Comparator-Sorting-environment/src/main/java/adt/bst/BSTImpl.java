@@ -14,6 +14,10 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 	public BSTNode<T> getRoot() {
 		return this.root;
 	}
+	
+	protected int compareElements(T o1, T o2) {
+		return o1.compareTo(o2);
+	}
 
 	@Override
 	public boolean isEmpty() {
@@ -53,9 +57,9 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 			if (node.getData().equals(element)) {
 				return node;
 			} else {
-				if (node.getData().compareTo(element) < 0) {
+				if (compareElements(element, node.getData()) > 0) {
 					return search((BSTNode<T>) node.getRight(), element);
-				} else {
+				} else if (compareElements(element, node.getData()) < 0) {
 					return search((BSTNode<T>) node.getLeft(), element);
 				}
 			}
@@ -77,7 +81,7 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 	}
 
 	private void insert(BSTNode<T> node, T element) {
-		if (node.getData().compareTo(element) > 0) {
+		if (compareElements(element, node.getData()) < 0) {
 			if (node.getLeft().isEmpty()) {
 				node.getLeft().setData(element);
 				node.getLeft().setLeft(new BSTNode<T>());
@@ -145,7 +149,7 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 
 	private BSTNode<T> sucessor(BSTNode<T> node, T element) {
 		if (node.getParent() != null) {
-			if (node.getParent().getData().compareTo(element) > 0) {
+			if (compareElements(node.getParent().getData(), element) > 0) {
 				return (BSTNode<T>) node.getParent();
 			} else {
 				return sucessor((BSTNode<T>) node.getParent(), element);
@@ -171,7 +175,7 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 
 	private BSTNode<T> predecessor(BSTNode<T> node, T element) {
 		if (node.getParent() != null) {
-			if (node.getParent().getData().compareTo(element) < 0) {
+			if (compareElements(node.getParent().getData(), element) < 0) {
 				return (BSTNode<T>) node.getParent();
 			} else {
 				return predecessor((BSTNode<T>) node.getParent(), element);
