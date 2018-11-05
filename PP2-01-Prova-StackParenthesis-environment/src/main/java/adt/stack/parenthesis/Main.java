@@ -6,7 +6,7 @@ public class Main {
 		
 		LongestValidParenthesisSubstringImpl stack = new LongestValidParenthesisSubstringImpl();
 		
-		System.out.println(stack.findLongest("()()((((("));
+		System.out.println(stack.findLongest("((()))()((()()"));
 
 	}
 

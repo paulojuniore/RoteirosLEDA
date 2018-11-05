@@ -13,44 +13,47 @@ public class LongestValidParenthesisSubstringImpl implements LongestValidParenth
      * @see adt.stack.parenthesis.LongestValidParenthesisSubstring#findLongest(java.lang.String)
      */
     public String findLongest(String parenthesis) {
-		
-    	Stack<String> stack = new Stack<String>();
-    	
+	
     	String[] aux = parenthesis.split("");
     	String maior = "";
-    	boolean flag = true;
     	
-    	for(int i = 0; i < aux.length; i++) {
+    	boolean flag = true;
+    	for(int i = 0; i < aux.length; i++) {	
     		if(aux[i].equals("(")) {
-    			int cont = 1;
+    			int cont = i;
     			String aux2 = "";
     			String verifica = "";
     			while(aux[cont].equals("(")) {
-    				aux2 += aux[cont];
+    				aux2 += "(";
     				cont++;
+    				if(cont > aux2.length())
+    					break;
     			}
-    			for(int j = 0; j < cont; j++) {
-    				if(aux[cont].equals("("))
+    			int x = cont;
+    			while(x < aux.length) {
+    				if(aux[cont].equals("")) {
     					verifica += ")";
+    				}
+    				x++;
     			}
     			if(verifica.length() == aux2.length()) {
-    				String res = parenthesisMirror(aux2);
+    				String res = parenthesisMirror(verifica);
     				if(aux2.equals(res)) {
     					String auxiliar = aux2 + verifica;
     					if(maior.length() < auxiliar.length()) {
     						if(flag)
     							maior += aux2 + verifica;
-    						else	
+    						else
     							maior = aux2 + verifica;
-    						flag = true;
     					}
     				} 
     			} else {
-					flag = false;
-				}
+    				flag = false;
+    			}
     		}
     	}
-    	
+    	if(maior == "")
+    		maior = null;
     	return maior;
     }
     
