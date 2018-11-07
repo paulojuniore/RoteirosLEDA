@@ -142,6 +142,7 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 		}
 		T root = rootElement();
 		Util.swap(heap, 0, index);
+		heap[index] = null;
 		this.index--;
 
 		heapify(0);
@@ -162,10 +163,11 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 			return array;
 		}
 		buildHeap(array);
+		T[] aux = (T[]) new Comparable[size()];
 		for (int i = 0; i < array.length; i++) {
-			this.extractRootElement();
+			aux[i] = this.extractRootElement();
 		}
-		return heap;
+		return aux;
 	}
 
 	@Override
