@@ -197,15 +197,15 @@ public class AVLTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements 
 
 	private BSTNode<T> rotation(BSTNode<T> node) {
 		int alturaLeft = height((BSTNode<T>) node.getLeft());
-		int allturaRight = height((BSTNode<T>) node.getRight());
-		int diference = alturaLeft - allturaRight;
-		if (diference > 0) {
+		int alturaRight = height((BSTNode<T>) node.getRight());
+		int difference = alturaLeft - alturaRight;
+		if (difference > 0) {
 			int alturaEsquerda = height((BSTNode<T>) node.getLeft().getLeft());
 			int alturaDireita = height((BSTNode<T>) node.getLeft().getRight());
 
-			int deference = alturaEsquerda - alturaDireita;
+			int dif = alturaEsquerda - alturaDireita;
 
-			if (deference < 0) {
+			if (dif < 0) {
 				Util.leftRotation((BSTNode<T>) node.getLeft());
 				return Util.rightRotation(node);
 			} else {
@@ -216,9 +216,9 @@ public class AVLTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements 
 			int alturaEsquerda = height((BSTNode<T>) node.getRight().getLeft());
 			int alturaDireita = height((BSTNode<T>) node.getRight().getRight());
 
-			int deference = alturaEsquerda - alturaDireita;
+			int dif = alturaEsquerda - alturaDireita;
 
-			if (deference > 0) {
+			if (dif > 0) {
 				Util.rightRotation((BSTNode<T>) node.getRight());
 				return Util.leftRotation(node);
 			} else {
