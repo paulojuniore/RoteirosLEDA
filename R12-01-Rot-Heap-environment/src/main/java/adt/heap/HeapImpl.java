@@ -171,16 +171,6 @@ public class HeapImpl<T extends Comparable<T>> implements Heap<T> {
 			}
 		}
 		return (T[]) aux.toArray(new Comparable[0]);
-		
-//		if (array == null || array.length == 0) {
-//			return array;
-//		}
-//		buildHeap(array);
-//		T[] aux = (T[]) new Comparable[size()];
-//		for (int i = 0; i < array.length; i++) {
-//			aux[i] = this.extractRootElement();
-//		}
-//		return aux;
 	}
 
 	@Override
