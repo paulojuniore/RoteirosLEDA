@@ -28,7 +28,6 @@ public class AVLTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements 
 
 	// AUXILIARY
 	protected void rebalance(BSTNode<T> node) {
-		System.out.println("OKOK");
 		if (!node.isEmpty()) {
 			if (calculateBalance(node) > 1) {
 				if (calculateBalance((BSTNode<T>) node.getLeft()) >= 0) {
@@ -77,21 +76,16 @@ public class AVLTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements 
 		} else {
 			root = (BSTNode<T>) pivot;
 		}
-
 	}
 
 	// AUXILIARY
 	protected void rightRotation(BSTNode<T> node) {
 		BTNode<T> pivot = node.getLeft();
-
 		node.setLeft(pivot.getRight());
 		pivot.getRight().setParent(node);
-
 		pivot.setRight(node);
-
 		pivot.setParent(node.getParent());
 		node.setParent(pivot);
-
 		if (node != root) {
 			if (pivot.getParent().getLeft() == node) {
 				pivot.getParent().setLeft(pivot);

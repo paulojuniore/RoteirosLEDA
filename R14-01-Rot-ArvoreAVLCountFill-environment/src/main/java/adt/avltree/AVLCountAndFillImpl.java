@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import adt.bst.BSTNode;
-import adt.bt.Util;
 
 public class AVLCountAndFillImpl<T extends Comparable<T>> extends AVLTreeImpl<T> implements AVLCountAndFill<T> {
 

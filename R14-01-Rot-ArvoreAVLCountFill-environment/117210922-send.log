@@ -1,3 +1,29 @@
-<html><body><h1>504 Gateway Time-out</h1>
-The server didn't respond in time.
-</body></html>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2018-11-12T18:47:30.939-0300</date>
+  <logger>PAULO MENDES DA SILVA JUNIOR</logger>
+  <level>FINE</level>
+  <message>File 117210922-PAULO MENDES DA SILVA JUNIOR.zip was received. It was sent by PAULO MENDES DA SILVA JUNIOR from IP 192.168.0.100</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2018-11-14T09:51:02.054-0300</date>
+  <logger>PAULO MENDES DA SILVA JUNIOR</logger>
+  <level>FINE</level>
+  <message>File 117210922-PAULO MENDES DA SILVA JUNIOR.zip was received. It was sent by PAULO MENDES DA SILVA JUNIOR from IP 150.165.74.133</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2018-11-14T15:27:31.490-0300</date>
+  <logger>PAULO MENDES DA SILVA JUNIOR</logger>
+  <level>FINE</level>
+  <message>File 117210922-PAULO MENDES DA SILVA JUNIOR.zip was received. It was sent by PAULO MENDES DA SILVA JUNIOR from IP 192.168.0.100</message>
+</record>
