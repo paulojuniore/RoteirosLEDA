@@ -28,26 +28,23 @@ public class AVLTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements 
 
 	// AUXILIARY
 	protected void rebalance(BSTNode<T> node) {
+		System.out.println("OKOK");
 		if (!node.isEmpty()) {
 			if (calculateBalance(node) > 1) {
-
 				if (calculateBalance((BSTNode<T>) node.getLeft()) >= 0) {
 					rightRotation(node);
 				} else {
 					leftRotation((BSTNode<T>) node.getLeft());
 					rightRotation(node);
 				}
-
 			}
 			if (calculateBalance(node) < -1) {
-
 				if (calculateBalance((BSTNode<T>) node.getRight()) <= 0) {
 					leftRotation(node);
 				} else {
 					rightRotation((BSTNode<T>) node.getRight());
 					leftRotation(node);
 				}
-
 			}
 		}
 	}
@@ -106,7 +103,8 @@ public class AVLTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements 
 		}
 	}
 
-	protected void insert(T element, BTNode<T> node) {
+	@Override
+	protected void insert(BSTNode<T> node, T element) {
 		if (node.isEmpty()) {
 			node.setData(element);
 			node.setLeft(new BSTNode<T>());
@@ -121,12 +119,12 @@ public class AVLTreeImpl<T extends Comparable<T>> extends BSTImpl<T> implements 
 			}
 		} else {
 			if (node.getData().compareTo(element) == -1) {
-				insert(element, node.getRight());
+				insert((BSTNode<T>) node.getRight(), element);
 			} else {
-				insert(element, node.getLeft());
+				insert((BSTNode<T>) node.getLeft(), element);
 			}
 		}
-		rebalance((BSTNode<T>) node);
+		rebalanceUp((BSTNode<T>) node);
 	}
 
 	@Override

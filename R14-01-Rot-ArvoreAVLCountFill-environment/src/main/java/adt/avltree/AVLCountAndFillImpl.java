@@ -43,21 +43,21 @@ public class AVLCountAndFillImpl<T extends Comparable<T>> extends AVLTreeImpl<T>
 		if (!node.isEmpty()) {
 			if (calculateBalance(node) > 1) {
 				if (calculateBalance((BSTNode<T>) node.getLeft()) >= 0) {
-					Util.rightRotation(node);
+					rightRotation(node);
 					LLcounter++;
 				} else {
-					Util.leftRotation((BSTNode<T>) node.getLeft());
-					Util.rightRotation(node);
+					leftRotation((BSTNode<T>) node.getLeft());
+					rightRotation(node);
 					LRcounter++;
 				}
 			}
 			if (calculateBalance(node) < -1) {
 				if (calculateBalance((BSTNode<T>) node.getRight()) <= 0) {
-					Util.leftRotation(node);
+					leftRotation(node);
 					RRcounter++;
 				} else {
-					Util.rightRotation((BSTNode<T>) node.getRight());
-					Util.leftRotation(node);
+					rightRotation((BSTNode<T>) node.getRight());
+					leftRotation(node);
 					RLcounter++;
 				}
 			}
