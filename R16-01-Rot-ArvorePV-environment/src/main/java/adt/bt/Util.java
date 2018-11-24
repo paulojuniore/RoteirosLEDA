@@ -3,6 +3,12 @@ package adt.bt;
 import adt.bst.BSTNode;
 
 public class Util {
+	
+	public static <T extends Comparable<T>> boolean isLeftChild(BSTNode<T> node) {
+		return node.getParent() != null && !node.getParent().isEmpty()
+                && !node.getParent().getLeft().isEmpty() &&
+                node.getParent().getLeft().getData().equals(node.getData());
+	}
 
 	/**
 	 * A rotacao a esquerda em node deve subir e retornar seu filho a direita
