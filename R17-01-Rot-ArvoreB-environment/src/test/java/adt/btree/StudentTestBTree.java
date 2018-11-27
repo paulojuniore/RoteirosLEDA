@@ -26,7 +26,7 @@ public class StudentTestBTree {
 	public void testHeight() {
 		assertEquals(-1, tree1.height());
 		tree1.insert(2);
-		assertEquals(1, tree1.height());
+		assertEquals(0, tree1.height());
 	}
 
 	@Test
