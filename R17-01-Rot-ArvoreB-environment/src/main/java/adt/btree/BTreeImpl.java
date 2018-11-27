@@ -35,23 +35,41 @@ public class BTreeImpl<T extends Comparable<T>> implements BTree<T> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public BNode<T>[] depthLeftOrder() {
-		BNode<T>[] array = new BNode[this.countNodes()];
+		BNode<T>[] array = new BNode[sizeOfNodes(root)];
 
-		depthLeftOrder(array, 0, this.root);
+		depthLeftOrder(root, array);
 
 		return array;
 	}
 
-	private int depthLeftOrder(BNode<T> array[], int index, BNode<T> node) {
-		if (!node.isEmpty()) {
-			array[index++] = node;
+	private void depthLeftOrder(BNode<T> node, BNode<T>[] array) {
+		setNewNode(node, array);
 
-			for (int i = 0; i < node.children.size(); i++) {
-				index = depthLeftOrder(array, index, node.children.get(i));
-			}
+		for (BNode<T> nodeAux : node.getChildren()) {
+			depthLeftOrder(nodeAux, array);
 		}
+	}
 
-		return index;
+	private void setNewNode(BNode<T> node, BNode<T>[] array) {
+		int i = 0;
+
+		while (array[i] != null && i < array.length)
+			i++;
+
+		array[i] = node;
+	}
+	
+	private int sizeOfNodes(BNode<T> node) {
+		if (node.isEmpty()) {
+			return 0;
+		} else {
+			int result = 1;
+
+			for (BNode<T> nodeAux : node.getChildren())
+				result += sizeOfNodes(nodeAux);
+			
+			return result;
+		}
 	}
 
 	@Override
@@ -147,14 +165,51 @@ public class BTreeImpl<T extends Comparable<T>> implements BTree<T> {
 		}
 	}
 
-	@SuppressWarnings("unused")
 	private void split(BNode<T> node) {
-		node.split();
+
+		int median = node.size() / 2;
+		T mid = node.getElementAt(median);
+
+		BNode<T> left = node.copyLeftChildren(median);
+		BNode<T> right = node.copyRightChildren(median);
+
+		if (node == root) {
+			BNode<T> newRoot = new BNode<T>(node.getOrder());
+			newRoot.addElement(mid);
+			node.setParent(newRoot);
+			root = newRoot;
+
+			for (int i = 0; i < node.getChildren().size(); i++) {
+				if (i <= median) {
+					left.addChild(i, node.getChildren().get(i));
+				} else {
+					right.addChild(i - median - 1, node.getChildren().get(i));
+				}
+			}
+			newRoot.addChild(0, left);
+			newRoot.addChild(1, right);
+			newRoot.getChildren().get(0).setParent(newRoot);
+			newRoot.getChildren().get(1).setParent(newRoot);
+		} else {
+			promote(node);
+		}
 	}
 
-	@SuppressWarnings("unused")
 	private void promote(BNode<T> node) {
-		node.promote((node.size() - 1) / 2);
+
+		BNode<T> parent = node.getParent();
+		T mid = node.getElementAt(node.getOrder() / 2);
+		parent.addElement(mid);
+
+		int median = parent.getElements().indexOf(mid);
+		parent.removeChild(node);
+
+		node.getChildren().get(0).setParent(parent);
+		node.getChildren().get(1).setParent(parent);
+
+		node.getParent().removeChild(node);
+		node.getParent().addChild(median, node.getChildren().get(1));
+		node.getParent().addChild(median, node.getChildren().get(0));
 	}
 
 	// NAO PRECISA IMPLEMENTAR OS METODOS ABAIXO

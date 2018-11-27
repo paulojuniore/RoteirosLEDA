@@ -90,65 +90,13 @@ public class BNode<T extends Comparable<T>> {
 	}
 
 	protected void split() {
-		int mid = (size()) / 2;
-
-		BNode<T> left = this.copyLeft(mid);
-		BNode<T> right = this.copyRight(mid);
-
-		if (parent == null) {
-			parent = new BNode<T>(getMaxChildren());
-			parent.children.addFirst(this);
-		}
-
-		BNode<T> parent = this.parent;
-
-		int index = parent.indexOfChild(this);
-		parent.removeChild(this);
-
-		parent.addChild(index, left);
-		parent.addChild(index + 1, right);
-
-		left.setParent(parent);
-		right.setParent(parent);
-
-		this.promote(mid);
-
-		if (parent.size() >= getMaxChildren()) {
-			parent.split();
-		}
+		//TODO Implement your code here
+				throw new UnsupportedOperationException("Not implemented yet!");
 	}
 
 	protected void promote(int mid) {
-		T element = elements.get(mid);
-		this.parent.addElement(element);
-	}
-
-	private BNode<T> copyLeft(int mid) {
-		BNode<T> node = new BNode<T>(this.getMaxChildren());
-
-		for (int i = 0; i < mid; i++) {
-			node.addElement(this.elements.get(i));
-		}
-
-		for (int i = 0; i <= mid; i++) {
-			node.addChild(i, this.children.get(i));
-		}
-
-		return node;
-	}
-
-	private BNode<T> copyRight(int mid) {
-		BNode<T> node = new BNode<T>(this.getMaxChildren());
-
-		for (int i = mid + 1; i < elements.size(); i++) {
-			node.addElement(this.elements.get(i));
-		}
-
-		for (int i = mid + 1; i < this.children.size(); i++) {
-			node.addChild(i - mid - 1, this.children.get(i));
-		}
-
-		return node;
+		//TODO Implement your code here
+		throw new UnsupportedOperationException("Not implemented yet!");
 	}
 
 	public LinkedList<T> getElements() {
@@ -202,6 +150,24 @@ public class BNode<T extends Comparable<T>> {
 
 	public void setOrder(int order) {
 		this.order = order;
+	}
+	
+	public BNode<T> copyLeftChildren(int median) {
+		BNode<T> node = new BNode<T>(order);
+		
+		for (int i = 0; i < median; i++) {
+			node.addElement(elements.get(i));
+		}
+		return node;
+	}
+	
+	public BNode<T> copyRightChildren(int median) {
+		BNode<T> node = new BNode<T>(order);
+		
+		for (int i = median +1; i < getOrder(); i++) {
+			node.addElement(elements.get(i));
+		}
+		return node;
 	}
 
 }
