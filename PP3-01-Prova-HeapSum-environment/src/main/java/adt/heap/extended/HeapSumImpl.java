@@ -32,7 +32,7 @@ public class HeapSumImpl extends PriorityQueue<Integer> implements HeapSum {
 		boolean flag = true;
 		if(!this.isEmpty()) {
 			while(this.peek() != null && flag) {
-				if(this.peek() >= v1 && this.peek() >= v2) {
+				if(this.peek() >= v1 && this.peek() <= v2) {
 					sum += this.poll();
 				} else {
 					if(this.peek() <= v2) {
@@ -46,20 +46,6 @@ public class HeapSumImpl extends PriorityQueue<Integer> implements HeapSum {
 		}
 		return sum;
 	}
-
-//	private int ceil(Integer value) {
-//		int saida = 0;
-//		for(int i = 0; i < this.toArray().length; i++) {
-//			if(value == this.toArray()[i]) {
-//				saida = i;
-//				break;
-//			} else if(value.compareTo((Integer) this.toArray()[i]) < 0) {
-//				saida = i;
-//				break;
-//			}
-//		}
-//		return saida;
-//	}
 
 	@Override
 	public Integer sumRangeAtLevel(int level) {

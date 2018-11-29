@@ -1,7 +1,5 @@
 package adt.heap.extended;
 
-import java.util.Arrays;
-
 public class Main {
 
 	public static void main(String[] args) {
@@ -15,9 +13,9 @@ public class Main {
 		heap.add(13);
 		heap.add(15);
 		heap.add(17);
+		System.out.println(heap.sumRangeBetween(3, 9));
 		System.out.println(heap.sumRangeAtLevel(1));
 		System.out.println(heap.sumRangeOrderStatistics(3, 8));
-		System.out.println(Arrays.toString(heap.toArray()));
 	}
 
 }
