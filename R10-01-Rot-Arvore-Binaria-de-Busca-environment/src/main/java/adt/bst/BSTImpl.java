@@ -30,6 +30,8 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 		}
 	}
 
+	// MÉTODOS PARA CONTAR A QUANTIDADE DE FOLHAS DE UMA BST.
+	
 	public Integer countLeaf() {
 		return countLeaf(this.root);
 	}
@@ -46,17 +48,19 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 		return toReturn;
 	}
 	
+	// MÉTODOS PARA VERIFICAR SE DUAS BST'S SÃO IGUAIS.
+	
 	public boolean isEqualsBST(BSTImpl<T> bst2) {
-		return isEqualsBST(root, bst2.getRoot());
+		return isEqualsBST(this.root, bst2.root);
 	}
 
 	private boolean isEqualsBST(BSTNode<T> node1, BSTNode<T> node2) {
 		boolean toReturn = false;
 		if(node1.isEmpty() && node2.isEmpty()) {
 			toReturn = true;
-		} else if (node1.getData().compareTo(node2.getData()) == 0) {
-			toReturn = isEqualsBST(node1.getLeft(), node2.getLeft()) &&
-					isEqualsBST(node1.getRight(), node2.getRight());
+		} else if (!node1.isEmpty() && !node2.isEmpty() && node1.getData().compareTo(node2.getData()) == 0) {
+			toReturn = isEqualsBST((BSTNode<T>) node1.getLeft(), (BSTNode<T>) node2.getLeft()) &&
+					isEqualsBST((BSTNode<T>) node1.getRight(), (BSTNode<T>) node2.getRight());
 		}
 		return toReturn;
 	}
