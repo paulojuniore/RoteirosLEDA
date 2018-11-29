@@ -13,6 +13,54 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 		root = new BSTNode<T>();
 	}
 
+	public boolean detectBST(BSTNode<T> node) {
+		if(node.isLeaf()) {
+			return true;
+		} else if(!node.isEmpty()){
+			boolean var = true;
+			if (node.getLeft().getData().compareTo(node.getData()) > 0) {
+				var = false;
+			}
+			if (node.getRight().getData().compareTo(node.getData()) < 0) {
+				var = false;
+			}
+			return var && detectBST((BSTNode<T>) node.getLeft()) && detectBST((BSTNode<T>) node.getRight());
+		} else {
+			return false;
+		}
+	}
+
+	public Integer countLeaf() {
+		return countLeaf(this.root);
+	}
+
+	private Integer countLeaf(BSTNode<T> node) {
+		Integer toReturn = 0;
+		if (!node.isEmpty()) {
+			if (node.isLeaf()) {
+				toReturn = 1;
+			} else {
+				toReturn = countLeaf((BSTNode<T>) node.getLeft()) + countLeaf((BSTNode<T>) node.getRight());
+			}
+		}
+		return toReturn;
+	}
+	
+	public boolean isEqualsBST(BSTImpl<T> bst2) {
+		return isEqualsBST(root, bst2.getRoot());
+	}
+
+	private boolean isEqualsBST(BSTNode<T> node1, BSTNode<T> node2) {
+		boolean toReturn = false;
+		if(node1.isEmpty() && node2.isEmpty()) {
+			toReturn = true;
+		} else if (node1.getData().compareTo(node2.getData()) == 0) {
+			toReturn = isEqualsBST(node1.getLeft(), node2.getLeft()) &&
+					isEqualsBST(node1.getRight(), node2.getRight());
+		}
+		return toReturn;
+	}
+
 	public BSTNode<T> getRoot() {
 		return this.root;
 	}
@@ -396,6 +444,7 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 		System.out.println(tree.minimum());
 		System.out.println(tree.maximum());
 		System.out.println(Arrays.toString(tree.postOrder()));
+		System.out.println(tree.countLeaf());
 	}
 
 }
