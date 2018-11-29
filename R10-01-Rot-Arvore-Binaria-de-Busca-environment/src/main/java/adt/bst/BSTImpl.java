@@ -13,23 +13,6 @@ public class BSTImpl<T extends Comparable<T>> implements BST<T> {
 		root = new BSTNode<T>();
 	}
 
-	public boolean detectBST(BSTNode<T> node) {
-		if(node.isLeaf()) {
-			return true;
-		} else if(!node.isEmpty()){
-			boolean var = true;
-			if (node.getLeft().getData().compareTo(node.getData()) > 0) {
-				var = false;
-			}
-			if (node.getRight().getData().compareTo(node.getData()) < 0) {
-				var = false;
-			}
-			return var && detectBST((BSTNode<T>) node.getLeft()) && detectBST((BSTNode<T>) node.getRight());
-		} else {
-			return false;
-		}
-	}
-
 	// MÉTODOS PARA CONTAR A QUANTIDADE DE FOLHAS DE UMA BST.
 	
 	public Integer countLeaf() {
