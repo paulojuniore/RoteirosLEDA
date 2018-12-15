@@ -2,7 +2,6 @@ package adt.heap.extended;
 
 import java.util.PriorityQueue;
 
-
 /**
  * A classe HeapSumImpl herda de PriorityQueue, que funciona como uma min heap.
  * 
@@ -13,69 +12,44 @@ public class HeapSumImpl extends PriorityQueue<Integer> implements HeapSum {
 
 	@Override
 	public Integer sumRangeOrderStatistics(Integer k1, Integer k2) {
-		int sum = 0;
-		int contador = 1;
-		while(contador <= k2) {
-			if(contador >= k1) {
-				sum += this.poll();
-			} else {
-				this.poll();
+		int cont = 1, soma = 0;
+		while(cont <= k2) {
+			if(cont >= k1) {
+				soma += this.peek();
 			}
-			contador++;
+			this.poll();
+			cont++;
 		}
-		return sum;
+		return (Integer) soma;
 	}
 
 	@Override
 	public Integer sumRangeBetween(Integer v1, Integer v2) {
-		int sum = 0;
-		boolean flag = true;
-		if(!this.isEmpty()) {
-			while(this.peek() != null && flag) {
-				if(this.peek() >= v1 && this.peek() <= v2) {
-					sum += this.poll();
-				} else {
-					if(this.peek() <= v2) {
-						flag = true;
-						this.poll();
-					} else {
-						flag = false;
-					}
-				}
+		int soma = 0;
+		while(this.peek() <= v2) {
+			if(this.peek() >= v1) {
+				soma += this.poll();
+			} else {
+				this.poll();
 			}
 		}
-		return sum;
+		return (Integer) soma;
 	}
 
 	@Override
 	public Integer sumRangeAtLevel(int level) {
-		int sum = 0;
-		Integer[] array = new Integer[this.toArray().length];
-		array = converte(array, this.toArray());
-		
-		int ini = (int) (Math.pow(2, level) - 1);
+		int ini = (int) ((Math.pow(2, level)) - 1);
 		int fim = (int) (Math.pow(2, level + 1) - 2);
-		int flag = 0;
-		if(ini < array.length) {
-			if(fim > array.length) {
-				flag = array.length - 1;
+		int cont = 0, soma = 0;
+		while(!this.isEmpty()) {
+			if(cont >= ini && cont <= fim) {
+				soma += this.poll();
 			} else {
-				flag = fim;
+				this.poll();
 			}
-			for(int i = ini; i <= flag; i++) {
-				if(array[i] != null) {
-					sum += array[i];
-				}
-			}
+			cont++;
 		}
-		return sum;
-	}
-
-	private Integer[] converte(Integer[] array, Object[] array2) {
-		for(int i = 0; i < array2.length;i++) {
-			array[i] = (Integer) array2[i];
-		}
-		return array;
+		return (Integer) soma;
 	}
 
 }
