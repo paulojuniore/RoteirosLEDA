@@ -1,5 +1,7 @@
 package adt.linkedList;
 
+import java.util.Arrays;
+
 public class SingleLinkedListImpl<T> implements LinkedList<T> {
 
 	protected SingleLinkedListNode<T> head;
@@ -128,6 +130,18 @@ public class SingleLinkedListImpl<T> implements LinkedList<T> {
 			retorno = node.getData();
 		}
 		return retorno;
+	}
+	
+	public static void main(String[] args) {
+		SingleLinkedListImpl<Integer> list = new SingleLinkedListImpl<>();
+		list.insert(20);
+		list.insert(30);
+		list.insert(50);
+		list.insert(80);
+		System.out.println(Arrays.toString(list.toArray()));
+		list.swap(20, 80);
+		System.out.println(Arrays.toString(list.toArray()));
+		System.out.println(list.elementFromTheEnd(1));
 	}
 
 }
