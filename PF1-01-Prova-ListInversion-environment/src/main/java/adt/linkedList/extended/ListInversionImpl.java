@@ -7,24 +7,37 @@ public class ListInversionImpl extends SingleLinkedListImpl<Integer> implements 
 
 	@Override
 	public void reverseIterative() {
-		SingleLinkedListNode<Integer> node;
+		SingleLinkedListNode<Integer> next;
 		SingleLinkedListNode<Integer> aux = this.head;
 		SingleLinkedListNode<Integer> novoHead = new SingleLinkedListNode<>();
 		while(!aux.isNIL()) {
-			node = aux.getNext();
+			next = aux.getNext();
 			aux.setNext(novoHead);
 			novoHead = aux;
-			aux = node;
+			aux = next;
 		}
 		this.head = novoHead;
 	}
 	
 	@Override
 	public void reverseRecursive() {
-		//TODO Implement your code here
-		throw new UnsupportedOperationException("Not implemented yet!");
+		SingleLinkedListNode<Integer> node = this.head;
+		SingleLinkedListNode<Integer> ultimo = new SingleLinkedListNode<>();
+		while(!node.isNIL()) {
+			ultimo = node;
+			node = node.getNext();
+		}
+		inverteNode(this.head, new SingleLinkedListNode<>());
+		this.head = ultimo;
 	}
 	
+
+	private void inverteNode(SingleLinkedListNode<Integer> node, SingleLinkedListNode<Integer> anterior) {
+		if(!node.getNext().isNIL()) {
+			inverteNode(node.getNext(), node);
+		}
+		node.setNext(anterior);
+	}
 
 	//NAO ALTERE NADA NESTE METODO. ELE SERA UTIL QUANDO VOCE QUISER TESTAR SUA IMPLEMENTACAO
 	@Override
@@ -42,5 +55,10 @@ public class ListInversionImpl extends SingleLinkedListImpl<Integer> implements 
 		}
 	}
 
+	
+	
+	
+	
+	
 	
 }
